@@ -130,7 +130,7 @@ int main(int argc, char *argv[])
 #if defined(OPT)
     output = fopen("opt.txt", "a");
 #elif defined(HASH)
-    output = fopen("hash.txt", "a");
+	output = fopen("hash.txt", "a");
 #elif defined(BST)
 	output = fopen("bst.txt", "a");
 #else

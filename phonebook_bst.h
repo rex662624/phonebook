@@ -1,9 +1,6 @@
 #ifndef _PHONEBOOK_H
 #define _PHONEBOOK_H
-
 #define MAX_LAST_NAME_SIZE 16
-
-#define OPT 2
 
 typedef struct __PHONE_BOOK_DETAIL_ENTRY {
     char firstName[16];
