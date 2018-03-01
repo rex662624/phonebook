@@ -2,19 +2,16 @@
 #define _PHONEBOOK_H
 
 #define MAX_LAST_NAME_SIZE 16
+#define MOD 30000
 
-/* TODO: After modifying the original version, uncomment the following
- * line to set OPT properly */
-// #define OPT 1
+/* original version */
 typedef struct __PHONE_BOOK_ENTRY {
     char lastName[MAX_LAST_NAME_SIZE];
-    struct __PHONE_BOOK_ENTRY_DETAIL *pDetail;
+    struct __ENTRY_DETAIL *pDetail;
     struct __PHONE_BOOK_ENTRY *pNext;
 } entry;
 
-//1.縮減struct __PHONE_BOOK_ENTRY 的成員,使cache miss 降低
-
-typedef struct __PHONE_BOOK_ENTRY_DETAIL {
+typedef struct __ENTRY_DETAIL {
     char firstName[16];
     char email[16];
     char phone[10];
@@ -26,8 +23,8 @@ typedef struct __PHONE_BOOK_ENTRY_DETAIL {
     char zip[5];
 } detail;
 
-entry *findName(char lastName[], entry *pHead);
-entry *append(char lastName[], entry *e);
-
-
+entry *findName(char lastname[], entry *table[]);
+void append(char lastName[], entry *table[]);
+void initTable(entry *table[]);
+unsigned hash(char lastName[]);
 #endif
