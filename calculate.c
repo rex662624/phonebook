@@ -83,8 +83,8 @@ int main(void)
     }
 
 //---------------------memorypool----
-FILE *fp_memorypool;
-fp_memorypool = fopen("memorypool.txt", "r");
+    FILE *fp_memorypool;
+    fp_memorypool = fopen("memorypool.txt", "r");
     if (!fp_memorypool) {
         if (!fp) {
             printf("ERROR opening input file memorypool.txt\n");

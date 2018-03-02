@@ -29,10 +29,10 @@ void *pool_alloc(memory_pool *pool, int size)
 
 void pool_free(memory_pool *pool)
 {
- 	
-   	free(pool->begin);
-	free(pool);
-	
+
+    free(pool->begin);
+    free(pool);
+
 }
 
 

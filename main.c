@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     }
 
 #if defined(POOL)
-	init_memory_pool(sizeof(entry) * 350000);
+    init_memory_pool(sizeof(entry) * 350000);
 #endif
 
     /* build the entry */
@@ -67,18 +67,18 @@ int main(int argc, char *argv[])
     clock_gettime(CLOCK_REALTIME, &end);
     cpu_time1 = diff_in_second(start, end);
 #elif defined (BST)//method2:BST
-	   clock_gettime(CLOCK_REALTIME, &start);
+    clock_gettime(CLOCK_REALTIME, &start);
     while (fgets(line, sizeof(line), fp)) {
         while (line[i] != '\0')
-    		i++;
+            i++;
         line[i - 1] = '\0';
-		i = 0;
-		e = append(line, e);
-	}
-	/* Build BST from a sorted linked-list */
-	treeNode *root = BuildBST(&pHead, Length(pHead));
-	clock_gettime(CLOCK_REALTIME, &end);
-	cpu_time1 = diff_in_second(start, end);
+        i = 0;
+        e = append(line, e);
+    }
+    /* Build BST from a sorted linked-list */
+    treeNode *root = BuildBST(&pHead, Length(pHead));
+    clock_gettime(CLOCK_REALTIME, &end);
+    cpu_time1 = diff_in_second(start, end);
 #else
     clock_gettime(CLOCK_REALTIME, &start);
     while (fgets(line, sizeof(line), fp)) {
@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
 #if defined(__GNUC__)
     __builtin___clear_cache((char *) pHead, (char *) pHead + sizeof(entry));
 #endif
-	
+
     /* compute the execution time */
 
 #if defined(HASH)
@@ -118,11 +118,11 @@ int main(int argc, char *argv[])
     clock_gettime(CLOCK_REALTIME, &end);
     cpu_time2 = diff_in_second(start, end);
 #elif defined(BST)
-	
-	 clock_gettime(CLOCK_REALTIME, &start);
-     findName(input, root);
-     clock_gettime(CLOCK_REALTIME, &end);
-     cpu_time2 = diff_in_second(start, end);
+
+    clock_gettime(CLOCK_REALTIME, &start);
+    findName(input, root);
+    clock_gettime(CLOCK_REALTIME, &end);
+    cpu_time2 = diff_in_second(start, end);
 
 #else
     clock_gettime(CLOCK_REALTIME, &start);
@@ -136,11 +136,11 @@ int main(int argc, char *argv[])
 #if defined(OPT)
     output = fopen("opt.txt", "a");
 #elif defined(HASH)
-	output = fopen("hash.txt", "a");
+    output = fopen("hash.txt", "a");
 #elif defined(BST)
-	output = fopen("bst.txt", "a");
+    output = fopen("bst.txt", "a");
 #elif defined(POOL)
-	output = fopen("memorypool.txt", "a");
+    output = fopen("memorypool.txt", "a");
 #else
     output = fopen("orig.txt", "a");
 #endif
@@ -152,12 +152,12 @@ int main(int argc, char *argv[])
     printf("execution time of findName() : %lf sec\n", cpu_time2);
 
 #if defined(POOL)
-	free_memory_pool();
+    free_memory_pool();
 #else
-	if(pHead!=NULL){
-    if (pHead->pNext) free(pHead->pNext);
-    free(pHead);
-	}
+    if(pHead!=NULL) {
+        if (pHead->pNext) free(pHead->pNext);
+        free(pHead);
+    }
 #endif
     return 0;
 }
