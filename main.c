@@ -36,12 +36,18 @@ int main(int argc, char *argv[])
         return -1;
     }
 
+#if defined(POOL)
+	init_memory_pool(sizeof(entry) * 350000);
+#endif
+
     /* build the entry */
     entry *pHead, *e;
     pHead = (entry *) malloc(sizeof(entry));
     printf("size of entry : %lu bytes\n", sizeof(entry));
     e = pHead;
     e->pNext = NULL;
+
+
 
 #if defined(__GNUC__)
     __builtin___clear_cache((char *) pHead, (char *) pHead + sizeof(entry));
@@ -133,6 +139,8 @@ int main(int argc, char *argv[])
 	output = fopen("hash.txt", "a");
 #elif defined(BST)
 	output = fopen("bst.txt", "a");
+#elif defined(POOL)
+	output = fopen("memorypool.txt", "a");
 #else
     output = fopen("orig.txt", "a");
 #endif
@@ -142,9 +150,14 @@ int main(int argc, char *argv[])
 
     printf("execution time of append() : %lf sec\n", cpu_time1);
     printf("execution time of findName() : %lf sec\n", cpu_time2);
+
+#if defined(POOL)
+	free_memory_pool();
+#else
 	if(pHead!=NULL){
     if (pHead->pNext) free(pHead->pNext);
     free(pHead);
 	}
+#endif
     return 0;
 }

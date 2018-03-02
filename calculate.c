@@ -82,10 +82,29 @@ int main(void)
         bst_sum_f += bst_f;
     }
 
-//-------------------------
-
-    fprintf(output, "append() %lf %lf %lf %lf\n",orig_sum_a / 100.0, opt_sum_a / 100.0, hash_sum_a / 100.0,bst_sum_a / 100.0);
-    fprintf(output, "findName() %lf %lf %lf %lf", orig_sum_f / 100.0, opt_sum_f / 100.0, hash_sum_f / 100.0,bst_sum_f / 100.0);
+//---------------------memorypool----
+FILE *fp_memorypool;
+fp_memorypool = fopen("memorypool.txt", "r");
+    if (!fp_memorypool) {
+        if (!fp) {
+            printf("ERROR opening input file memorypool.txt\n");
+            exit(0);
+        }
+    }
+    double memorypool_sum_a = 0.0, memorypool_sum_f = 0.0, memorypool_a, memorypool_f;
+    for (i = 0; i < 100; i++) {
+        if (feof(fp_memorypool)) {
+            printf("ERROR: You need 100 datum instead of %d\n", i);
+            printf("run 'make run' longer to get enough information\n\n");
+            exit(0);
+        }
+        fscanf(fp_memorypool, "%s %s %lf %lf\n", append, find,&memorypool_a, &memorypool_f);
+        memorypool_sum_a += memorypool_a;
+        memorypool_sum_f += memorypool_f;
+    }
+//----------------------------------
+    fprintf(output, "append() %lf %lf %lf %lf %lf\n",orig_sum_a / 100.0, opt_sum_a / 100.0, hash_sum_a / 100.0,bst_sum_a / 100.0,memorypool_sum_a / 100.0);
+    fprintf(output, "findName() %lf %lf %lf %lf %lf", orig_sum_f / 100.0, opt_sum_f / 100.0, hash_sum_f / 100.0,bst_sum_f / 100.0,memorypool_sum_f / 100.0);
 
     fclose(output);
     fclose(fp);

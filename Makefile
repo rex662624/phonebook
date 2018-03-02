@@ -3,7 +3,7 @@ CFLAGS_common ?= -Wall -std=gnu99
 CFLAGS_orig = -O0
 CFLAGS_opt  = -O0
 
-EXEC = phonebook_orig phonebook_opt phonebook_hash phonebook_bst
+EXEC = phonebook_orig phonebook_opt phonebook_hash phonebook_bst phonebook_memorypool
 all: $(EXEC)
 
 SRCS_common = main.c
@@ -24,12 +24,19 @@ phonebook_hash: $(SRCS_common) phonebook_hash.c phonebook_hash.h
                 -DIMPL="\"$@.h\"" -o $@ \
                 -DHASH=0 \
                 $(SRCS_common) $@.c
+
 phonebook_bst: $(SRCS_common) phonebook_bst.c phonebook_bst.h
 	$(CC) $(CFLAGS_common) $(CFLAGS_opt) \
 				-DIMPL="\"$@.h\"" -o $@ \
 				-DBST=0 \
-				$(SRCS_common) $@.c 
-
+				$(SRCS_common) $@.c
+ 
+phonebook_memorypool: $(SRCS_common) phonebook_memorypool.c phonebook_memorypool.h
+	$(CC) $(CFLAGS_common) $(CFLAGS_opt) \
+				-DIMPL="\"$@.h\"" -o $@ \
+				-DPOOL=0 \
+				$(SRCS_common) $@.c
+ 
 
 
 run: $(EXEC)
@@ -49,6 +56,9 @@ cache-test: $(EXEC)
 	perf stat --repeat 100 \
  				-e cache-misses,cache-references,instructions,cycles \
 				./phonebook_bst
+	perf stat --repeat 100 \
+                -e cache-misses,cache-references,instructions,cycles \
+                ./phonebook_memorypool
 
 
 output.txt: cache-test calculate
@@ -63,4 +73,4 @@ calculate: calculate.c
 .PHONY: clean
 clean:
 	$(RM) $(EXEC) *.o perf.* \
-	      	calculate orig.txt opt.txt output.txt runtime.png bst.txt hash.txt
+	      	calculate orig.txt opt.txt output.txt runtime.png bst.txt hash.txt memorypool.txt
