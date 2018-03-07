@@ -106,6 +106,12 @@ int main(int argc, char *argv[])
                "Did you implement findName() in " IMPL "?");
         assert(0 == strcmp(findName(input, e)->lastName, "zyxel"));
     */
+#if defined (FUZZY)
+printf("please enter the last name you want search: ");
+scanf("%s",input);
+printf("-------------------\n");
+#endif
+
 #if defined (SMAZ)
     char input_compressed[100];
     memset(input_compressed,sizeof(input_compressed),'\0');

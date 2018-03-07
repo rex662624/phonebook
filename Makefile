@@ -4,7 +4,7 @@ CFLAGS_orig = -O0
 CFLAGS_opt  = -O0
 
 EXEC = phonebook_orig phonebook_opt phonebook_hash phonebook_bst phonebook_memorypool phonebook_smaz
-all: $(EXEC)
+all: $(EXEC) phonebook_fuzzy
 
 SRCS_common = main.c
 
@@ -43,6 +43,11 @@ phonebook_smaz: $(SRCS_common) phonebook_smaz.c phonebook_smaz.h
 				-DSMAZ=0\
 				$(SRCS_common) $@.c
 
+phonebook_fuzzy: $(SRCS_common) phonebook_fuzzy.c phonebook_fuzzy.h
+	$(CC) $(CFLAGS_common) $(CFLAGS_opt) \
+				-DIMPL="\"$@.h\"" -o $@ \
+				-DFUZZY=0\
+				$(SRCS_common) $@.c
 
 
 run: $(EXEC)
@@ -82,4 +87,4 @@ calculate: calculate.c
 .PHONY: clean
 clean:
 	$(RM) $(EXEC) *.o perf.* \
-	      	calculate orig.txt opt.txt output.txt runtime.png bst.txt hash.txt memorypool.txt smaz.txt
+	      	calculate orig.txt opt.txt output.txt runtime.png bst.txt hash.txt memorypool.txt smaz.txt phonebook_fuzzy
