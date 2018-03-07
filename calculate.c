@@ -103,8 +103,8 @@ int main(void)
         memorypool_sum_f += memorypool_f;
     }
 //----------------------------------smaz
-  	FILE *fp_smaz;
-  	fp_smaz = fopen("smaz.txt", "r");
+    FILE *fp_smaz;
+    fp_smaz = fopen("smaz.txt", "r");
     if (!fp_smaz) {
         fp_smaz = fopen("smaz.txt", "r");
         if (!fp_smaz) {
@@ -122,10 +122,10 @@ int main(void)
         fscanf(fp_smaz, "%s %s %lf %lf\n", append, find,&smaz_a, &smaz_f);
         smaz_sum_a += smaz_a;
         smaz_sum_f += smaz_f;
-}
+    }
 //----------------------------------
-   fprintf(output, "append() %lf %lf %lf %lf %lf %lf\n",orig_sum_a / 100.0, opt_sum_a / 100.0, hash_sum_a / 100.0,bst_sum_a / 100.0,memorypool_sum_a / 100.0,smaz_sum_a / 100.0);
-   fprintf(output, "findName() %lf %lf %lf %lf %lf %lf", orig_sum_f / 100.0, opt_sum_f / 100.0, hash_sum_f / 100.0,bst_sum_f / 100.0,memorypool_sum_f / 100.0,smaz_sum_f / 100.0);
+    fprintf(output, "append() %lf %lf %lf %lf %lf %lf\n",orig_sum_a / 100.0, opt_sum_a / 100.0, hash_sum_a / 100.0,bst_sum_a / 100.0,memorypool_sum_a / 100.0,smaz_sum_a / 100.0);
+    fprintf(output, "findName() %lf %lf %lf %lf %lf %lf", orig_sum_f / 100.0, opt_sum_f / 100.0, hash_sum_f / 100.0,bst_sum_f / 100.0,memorypool_sum_f / 100.0,smaz_sum_f / 100.0);
 
     fclose(output);
     fclose(fp);

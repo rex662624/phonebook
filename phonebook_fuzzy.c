@@ -5,11 +5,11 @@
 #include "phonebook_fuzzy.h"
 
 entry *findName(char lastname[], entry *pHead)
-{		
-		fuzzySearch(lastname,pHead,SIMILARITY);								
-        if (strcasecmp(lastname, pHead->lastName) == 0)
-        	return pHead;
-	printf("Sorry, not found\n");
+{
+    fuzzySearch(lastname,pHead,SIMILARITY);
+    if (strcasecmp(lastname, pHead->lastName) == 0)
+        return pHead;
+    printf("Sorry, not found\n");
     return NULL;
 }
 
@@ -67,18 +67,18 @@ int wagnerFischer(const char *s, const char *t)
 entry *fuzzySearch(char lastName[],	entry *pHead,int similarity)
 {
 
-    	int distance;	
-        while (pHead != NULL) {
-            distance = wagnerFischer(lastName, pHead->lastName);
-            if (distance == 0) {
-                printf("\n\"%s\" has found!\n\n", lastName);
-                return pHead;
-            }
-            if (distance <= similarity) {
-                printf("%s\n", pHead->lastName);
-            }
-            pHead = pHead->pNext;
+    int distance;
+    while (pHead != NULL) {
+        distance = wagnerFischer(lastName, pHead->lastName);
+        if (distance == 0) {
+            printf("\n\"%s\" has found!\n\n", lastName);
+            return pHead;
         }
-    
+        if (distance <= similarity) {
+            printf("%s\n", pHead->lastName);
+        }
+        pHead = pHead->pNext;
+    }
+
     return NULL;
 }

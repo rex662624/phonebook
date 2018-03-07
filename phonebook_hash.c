@@ -26,10 +26,10 @@ void append(char lastName[], entry *table[])
     unsigned nHash = hash(lastName);
     entry *e = (entry *) malloc(sizeof(entry));
     if(table[nHash]==NULL) {
-		e -> pNext = NULL;
+        e -> pNext = NULL;
         table[nHash] = e;
     } else {
-		e -> pNext = table[nHash]->pNext;
+        e -> pNext = table[nHash]->pNext;
         table[nHash] -> pNext = e;
     }
     strcpy(e -> lastName, lastName);

@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
 
     /* the givn last name to find */
     char input[MAX_LAST_NAME_SIZE] = "zyxel";
-	//char input[MAX_LAST_NAME_SIZE] = "arriba";
+    //char input[MAX_LAST_NAME_SIZE] = "arriba";
     e = pHead;
     /*
         assert(findName(input, e) &&
@@ -107,15 +107,15 @@ int main(int argc, char *argv[])
         assert(0 == strcmp(findName(input, e)->lastName, "zyxel"));
     */
 #if defined (FUZZY)
-printf("please enter the last name you want search: ");
-scanf("%s",input);
-printf("-------------------\n");
+    printf("please enter the last name you want search: ");
+    scanf("%s",input);
+    printf("-------------------\n");
 #endif
 
 #if defined (SMAZ)
     char input_compressed[100];
     memset(input_compressed,sizeof(input_compressed),'\0');
-	smaz_compress(input, strlen(input), input_compressed, sizeof(input_compressed));
+    smaz_compress(input, strlen(input), input_compressed, sizeof(input_compressed));
 #endif
 
 #if defined(__GNUC__)
@@ -158,7 +158,7 @@ printf("-------------------\n");
 #elif defined(POOL)
     output = fopen("memorypool.txt", "a");
 #elif defined(SMAZ)
-	output = fopen("smaz.txt","a");
+    output = fopen("smaz.txt","a");
 #else
     output = fopen("orig.txt", "a");
 #endif
