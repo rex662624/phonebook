@@ -25,10 +25,11 @@ void append(char lastName[], entry *table[])
 {
     unsigned nHash = hash(lastName);
     entry *e = (entry *) malloc(sizeof(entry));
-    e -> pNext = table[nHash];
-    if(!table[nHash]) {
+    if(table[nHash]==NULL) {
+		e -> pNext = NULL;
         table[nHash] = e;
     } else {
+		e -> pNext = table[nHash]->pNext;
         table[nHash] -> pNext = e;
     }
     strcpy(e -> lastName, lastName);

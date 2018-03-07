@@ -103,8 +103,9 @@ int main(void)
         memorypool_sum_f += memorypool_f;
     }
 //----------------------------------
-    fprintf(output, "append() %lf %lf %lf %lf %lf\n",orig_sum_a / 100.0, opt_sum_a / 100.0, hash_sum_a / 100.0,bst_sum_a / 100.0,memorypool_sum_a / 100.0);
-    fprintf(output, "findName() %lf %lf %lf %lf %lf", orig_sum_f / 100.0, opt_sum_f / 100.0, hash_sum_f / 100.0,bst_sum_f / 100.0,memorypool_sum_f / 100.0);
+   fprintf(output, "append() %lf %lf %lf %lf %lf\n",orig_sum_a / 100.0, opt_sum_a / 100.0, hash_sum_a / 100.0,bst_sum_a / 100.0,memorypool_sum_a / 100.0);
+   fprintf(output, "findName() %lf %lf %lf %lf %lf", orig_sum_f / 100.0, opt_sum_f / 100.0, hash_sum_f / 100.0,bst_sum_f / 100.0,memorypool_sum_f / 100.0);
+
 
     fclose(output);
     fclose(fp);
