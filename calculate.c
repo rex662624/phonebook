@@ -102,10 +102,30 @@ int main(void)
         memorypool_sum_a += memorypool_a;
         memorypool_sum_f += memorypool_f;
     }
+//----------------------------------smaz
+  	FILE *fp_smaz;
+  	fp_smaz = fopen("smaz.txt", "r");
+    if (!fp_smaz) {
+        fp_smaz = fopen("smaz.txt", "r");
+        if (!fp_smaz) {
+            printf("ERROR opening input file smaz.txt\n");
+            exit(0);
+        }
+    }
+    double smaz_sum_a = 0.0, smaz_sum_f = 0.0, smaz_a, smaz_f;
+    for (i = 0; i < 100; i++) {
+        if (feof(fp_smaz)) {
+            printf("ERROR: You need 100 datum instead of %d\n", i);
+            printf("run 'make run' longer to get enough information\n\n");
+            exit(0);
+        }
+        fscanf(fp_smaz, "%s %s %lf %lf\n", append, find,&smaz_a, &smaz_f);
+        smaz_sum_a += smaz_a;
+        smaz_sum_f += smaz_f;
+}
 //----------------------------------
-   fprintf(output, "append() %lf %lf %lf %lf %lf\n",orig_sum_a / 100.0, opt_sum_a / 100.0, hash_sum_a / 100.0,bst_sum_a / 100.0,memorypool_sum_a / 100.0);
-   fprintf(output, "findName() %lf %lf %lf %lf %lf", orig_sum_f / 100.0, opt_sum_f / 100.0, hash_sum_f / 100.0,bst_sum_f / 100.0,memorypool_sum_f / 100.0);
-
+   fprintf(output, "append() %lf %lf %lf %lf %lf %lf\n",orig_sum_a / 100.0, opt_sum_a / 100.0, hash_sum_a / 100.0,bst_sum_a / 100.0,memorypool_sum_a / 100.0,smaz_sum_a / 100.0);
+   fprintf(output, "findName() %lf %lf %lf %lf %lf %lf", orig_sum_f / 100.0, opt_sum_f / 100.0, hash_sum_f / 100.0,bst_sum_f / 100.0,memorypool_sum_f / 100.0,smaz_sum_f / 100.0);
 
     fclose(output);
     fclose(fp);

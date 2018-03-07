@@ -3,7 +3,7 @@ CFLAGS_common ?= -Wall -std=gnu99
 CFLAGS_orig = -O0
 CFLAGS_opt  = -O0
 
-EXEC = phonebook_orig phonebook_opt phonebook_hash phonebook_bst phonebook_memorypool
+EXEC = phonebook_orig phonebook_opt phonebook_hash phonebook_bst phonebook_memorypool phonebook_smaz
 all: $(EXEC)
 
 SRCS_common = main.c
@@ -36,7 +36,13 @@ phonebook_memorypool: $(SRCS_common) phonebook_memorypool.c phonebook_memorypool
 				-DIMPL="\"$@.h\"" -o $@ \
 				-DPOOL=0 \
 				$(SRCS_common) $@.c
- 
+
+phonebook_smaz: $(SRCS_common) phonebook_smaz.c phonebook_smaz.h
+	$(CC) $(CFLAGS_common) $(CFLAGS_opt) \
+				-DIMPL="\"$@.h\"" -o $@ \
+				-DSMAZ=0\
+				$(SRCS_common) $@.c
+
 
 
 run: $(EXEC)
@@ -59,6 +65,9 @@ cache-test: $(EXEC)
 	perf stat --repeat 100 \
                 -e cache-misses,cache-references,instructions,cycles \
                 ./phonebook_memorypool
+	perf stat --repeat 100 \
+                -e cache-misses,cache-references,instructions,cycles \
+                ./phonebook_smaz
 
 
 output.txt: cache-test calculate
@@ -73,4 +82,4 @@ calculate: calculate.c
 .PHONY: clean
 clean:
 	$(RM) $(EXEC) *.o perf.* \
-	      	calculate orig.txt opt.txt output.txt runtime.png bst.txt hash.txt memorypool.txt
+	      	calculate orig.txt opt.txt output.txt runtime.png bst.txt hash.txt memorypool.txt smaz.txt

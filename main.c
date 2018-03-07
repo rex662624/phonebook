@@ -99,12 +99,18 @@ int main(int argc, char *argv[])
 
     /* the givn last name to find */
     char input[MAX_LAST_NAME_SIZE] = "zyxel";
+	//char input[MAX_LAST_NAME_SIZE] = "arriba";
     e = pHead;
     /*
         assert(findName(input, e) &&
                "Did you implement findName() in " IMPL "?");
         assert(0 == strcmp(findName(input, e)->lastName, "zyxel"));
     */
+#if defined (SMAZ)
+    char input_compressed[100];
+    memset(input_compressed,sizeof(input_compressed),'\0');
+	smaz_compress(input, strlen(input), input_compressed, sizeof(input_compressed));
+#endif
 
 #if defined(__GNUC__)
     __builtin___clear_cache((char *) pHead, (char *) pHead + sizeof(entry));
@@ -123,7 +129,11 @@ int main(int argc, char *argv[])
     findName(input, root);
     clock_gettime(CLOCK_REALTIME, &end);
     cpu_time2 = diff_in_second(start, end);
-
+#elif defined(SMAZ)
+    clock_gettime(CLOCK_REALTIME, &start);
+    findName(input_compressed,e);
+    clock_gettime(CLOCK_REALTIME, &end);
+    cpu_time2 = diff_in_second(start, end);
 #else
     clock_gettime(CLOCK_REALTIME, &start);
     findName(input, e);
@@ -141,6 +151,8 @@ int main(int argc, char *argv[])
     output = fopen("bst.txt", "a");
 #elif defined(POOL)
     output = fopen("memorypool.txt", "a");
+#elif defined(SMAZ)
+	output = fopen("smaz.txt","a");
 #else
     output = fopen("orig.txt", "a");
 #endif
