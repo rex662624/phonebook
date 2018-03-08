@@ -128,6 +128,9 @@ int main(void)
     fprintf(output, "findName() %lf %lf %lf %lf %lf %lf", orig_sum_f / 100.0, opt_sum_f / 100.0, hash_sum_f / 100.0,bst_sum_f / 100.0,memorypool_sum_f / 100.0,smaz_sum_f / 100.0);
 
     fclose(output);
+    fclose(fp_memorypool);
+    fclose(fp_bst);
+    fclose(fp_smaz)
     fclose(fp);
     return 0;
 }
