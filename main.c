@@ -113,8 +113,7 @@ int main(int argc, char *argv[])
 #endif
 
 #if defined (SMAZ)
-    char input_compressed[100];
-    memset(input_compressed,sizeof(input_compressed),'\0');
+    char input_compressed[MAX_LAST_NAME_SIZE];
     smaz_compress(input, strlen(input), input_compressed, sizeof(input_compressed));
 #endif
 

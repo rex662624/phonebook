@@ -31,7 +31,7 @@ treeNode *BuildBST(entry **headRef, int length)
 
     *headRef = (*headRef)->pNext;
 
-    root->right = BuildBST(headRef, length - (length / 2 + 1));
+    root->right = BuildBST(headRef, length - (length / 2) - 1);
 
     return root;
 }
@@ -48,7 +48,7 @@ entry *findName(char lastName[], treeNode *root)
             current = current -> right;
     }
 
-    if (root)
+    if (current)
         return (current->entry);
     else
         return NULL;

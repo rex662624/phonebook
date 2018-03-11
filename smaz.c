@@ -96,15 +96,15 @@ int smaz_compress(char *in, int inlen, char *out, int outlen)
          * longer to the shorter substrings */
         for (; j > 0; j--) {
             switch(j) {
-                case 1:
-                    slot = Smaz_cb[h1%241];
-                    break;
-                case 2:
-                    slot = Smaz_cb[h2%241];
-                    break;
-                default:
-                    slot = Smaz_cb[h3%241];
-                    break;
+            case 1:
+                slot = Smaz_cb[h1%241];
+                break;
+            case 2:
+                slot = Smaz_cb[h2%241];
+                break;
+            default:
+                slot = Smaz_cb[h3%241];
+                break;
             }
             while(slot[0]) {
                 if (slot[0] == j && memcmp(slot+1,in,j) == 0) {

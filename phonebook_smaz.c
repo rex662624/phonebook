@@ -21,7 +21,6 @@ entry *append(char lastName[], entry *e)
 {
     e->pNext = (entry *) malloc(sizeof(entry));
     e = e->pNext;
-    memset(e->lastName,sizeof(lastName),'\0');
     //compress string
     smaz_compress(lastName,strlen(lastName),e->lastName,sizeof(lastName));
     e->pNext = NULL;
